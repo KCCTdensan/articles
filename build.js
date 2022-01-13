@@ -23,24 +23,29 @@ const assetDistDir = "dist/assets"
     async function proc(srcDir, distFile) {
       const files = await glob(`${srcDir}/**/*.md`)
       const data = { data: [], }
-      await Promise.all(files.map(async path => {
-        const content = fm((await fs.readFile(path)).toString())
-        data.data.push({
-          slug:     content.attributes.slug || path.slice(`${srcDir}/`.length, -3),
-          title:    content.attributes.title,
-          description: content.attributes.description,
-          author:   content.attributes.author,
-          noRobots: content.attributes.noRobots,
-          date:     content.attributes.date,
-          dateUpd:  content.attributes.dateUpd,
-          body:     content.body,
+      await Promise.all(
+        files.map(async path => {
+          const content = fm((await fs.readFile(path)).toString())
+          data.data.push({
+            slug: content.attributes.slug || path.slice(`${srcDir}/`.length, -3),
+            title: content.attributes.title,
+            description: content.attributes.description,
+            author: content.attributes.author,
+            noRobots: content.attributes.noRobots,
+            date: content.attributes.date,
+            dateUpd: content.attributes.dateUpd,
+            body: content.body,
+          })
         })
-      }))
+      )
       fs.writeFile(distFile, JSON.stringify(data))
     }
-  
-    proc(`${srcDir}/blog`, `${distDir}/blog.json`)
-    proc(`${srcDir}/news`, `${distDir}/news.json`)
+
+    (await glob(`${srcDir}/*`)).forEach(async path => {
+      if((await fs.stat(path)).isDirectory()) {
+        proc(path, `${distDir}/${path.slice(`${srcDir}/`.length)}.json`)
+      }
+    })
   } catch(e) {
     console.error("Error occured in MD phase")
     console.error(e)
