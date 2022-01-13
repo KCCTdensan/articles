@@ -23,7 +23,7 @@ const assetDistDir = "dist/assets"
     async function proc(srcDir, distFile) {
       const files = await glob(`${srcDir}/**/*.md`)
       const data = { data: [], }
-      files.forEach(async path => {
+      await Promise.all(files.map(async path => {
         const content = fm((await fs.readFile(path)).toString())
         data.data.push({
           slug:     content.attributes.slug || path.slice(`${srcDir}/`.length, -3),
@@ -35,7 +35,7 @@ const assetDistDir = "dist/assets"
           dateUpd:  content.attributes.dateUpd,
           body:     content.body,
         })
-      })
+      }))
       fs.writeFile(distFile, JSON.stringify(data))
     }
   
