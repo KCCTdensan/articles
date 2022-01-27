@@ -47,7 +47,7 @@ node.js(サーバーサイドで動作するJavaScript)で作られたパッケ�
         hexo server
         ```
         こんな感じのページが見れるはず。
-        ![hexopage]($assets/hexopage.png)
+        ![hexopage]($assets/img/hexopage.png)
 
 - ### 使い方
     1. 記事の追加
