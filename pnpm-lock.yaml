@@ -2,10 +2,12 @@ lockfileVersion: 5.3
 
 specifiers:
   front-matter: 4.0.2
+  marked: 4.0.11
   tiny-glob: 0.2.9
 
 dependencies:
   front-matter: 4.0.2
+  marked: 4.0.11
   tiny-glob: 0.2.9
 
 packages:
@@ -42,6 +44,12 @@ packages:
     dependencies:
       argparse: 1.0.10
       esprima: 4.0.1
+    dev: false
+
+  /marked/4.0.11:
+    resolution: {integrity: sha512-xL2aJ5JDggqToKOqKHJWIDXaYk24XoGm1mNlhSPFP+0OKRCcKx+/hH7hlAr5LYqBKUzqCANylALgwNstVRgtCw==}
+    engines: {node: '>= 12'}
+    hasBin: true
     dev: false
 
   /sprintf-js/1.0.3:

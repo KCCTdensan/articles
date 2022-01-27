@@ -1,6 +1,7 @@
 const fs = require("fs").promises
 const glob = require("tiny-glob")
 const fm = require("front-matter")
+const { marked } = require("marked")
 
 const srcDir = "src"
 const assetDir = "assets"
@@ -34,7 +35,7 @@ const assetDistDir = "dist/assets"
             noRobots: content.attributes.noRobots,
             date: content.attributes.date,
             dateUpd: content.attributes.dateUpd,
-            body: content.body,
+            body: marked.parse(content.body),
           })
         })
       )
