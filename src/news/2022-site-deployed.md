@@ -6,7 +6,7 @@ author: 山D
 
 # k8sの導入
 
-この度，`d3bu.net`ドメインの向き先をGitHub Pagesからラズパイクラスタのk0sクラスタに変えました．
+この度，`d3bu.net`の向き先をGitHub Pagesからラズパイクラスタのk8s Serviceに変えました．
 
 それだけ．
 
