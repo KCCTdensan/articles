@@ -10,6 +10,6 @@ author: 山D
 
 それだけ．
 
-![raspberry pi cluster](/assets/img/raspi.png)
+![raspberry pi cluster]($assets/img/raspi-overview.jpg)
 
 詳細 : [/dev/cluster/](/dev/cluster/)
