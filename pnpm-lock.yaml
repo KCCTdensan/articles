@@ -2,12 +2,12 @@ lockfileVersion: 5.3
 
 specifiers:
   front-matter: 4.0.2
-  marked: 4.0.13
+  marked: 4.0.14
   tiny-glob: 0.2.9
 
 dependencies:
   front-matter: 4.0.2
-  marked: 4.0.13
+  marked: 4.0.14
   tiny-glob: 0.2.9
 
 packages:
@@ -46,8 +46,8 @@ packages:
       esprima: 4.0.1
     dev: false
 
-  /marked/4.0.13:
-    resolution: {integrity: sha512-lS/ZCa4X0gsRcfWs1eoh6dLnHr9kVH3K1t2X4M/tTtNouhZ7anS1Csb6464VGLQHv8b2Tw1cLeZQs58Jav8Rzw==}
+  /marked/4.0.14:
+    resolution: {integrity: sha512-HL5sSPE/LP6U9qKgngIIPTthuxC0jrfxpYMZ3LdGDD3vTnLs59m2Z7r6+LNDR3ToqEQdkKd6YaaEfJhodJmijQ==}
     engines: {node: '>= 12'}
     hasBin: true
     dev: false
