@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "dependencies": {
     "front-matter": "4.0.2",
-    "marked": "4.0.14",
+    "marked": "4.0.16",
     "tiny-glob": "0.2.9"
   },
   "private": true,
