@@ -1,7 +1,7 @@
 ---
-title: 考える人
+title: じゃんけん大会vol.2
 date: 2022-05-22 17:30:00
-author: 考える人
+author: 考える人, isirmt
 ---
 
 # じゃんけん大会vol.2
