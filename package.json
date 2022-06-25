@@ -2,9 +2,9 @@
   "name": "articles",
   "version": "2.0.0",
   "dependencies": {
-    "front-matter": "4.0.2",
-    "marked": "4.0.16",
-    "tiny-glob": "0.2.9"
+    "front-matter": "^4.0.2",
+    "marked": "^4.0.17",
+    "tiny-glob": "^0.2.9"
   },
   "private": true,
   "scripts": {
