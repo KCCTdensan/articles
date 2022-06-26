@@ -18,6 +18,7 @@ dateUpd: 2022-04-03
       <summary class="contestYear">2021年</summary>
       <ul>
         <li>日本ゲーム大賞2021 U18部門 参加</li>
+        <li>パソコン甲子園2021 プログラミング部門 参加</li>
       </ul>
     </details>
   </li>
