@@ -137,9 +137,14 @@ $ ./prom-migrator --start=0 --reader-url=http://localhost:9201/read --writer-url
 ## 使ったファイル
 
 - promscale
-    - https://github.com/timescale/promscale/releases/download/0.7.1/promscale_0.7.1_Linux_x86_64.deb
-- prom-migrator(使ってない)
-    - https://github.com/timescale/promscale/releases/download/0.7.1/prom-migrator_0.0.3_Linux_x86_64
+<!--     - https://github.com/timescale/promscale/releases/download/0.7.1/promscale_0.7.1_Linux_x86_64.deb -->
+    - https://github.com/timescale/promscale/releases/download/0.12.1/promscale_0.12.1_Linux_x86_64.deb
+- prom-migrator (いい感じに使ってね)
+<!--     - https://github.com/timescale/promscale/releases/download/0.7.1/prom-migrator_0.0.3_Linux_x86_64 -->
+    - https://github.com/timescale/promscale/releases/download/0.12.1/prom-migrator_0.0.4_Linux_x86_64
+
+- promscale
+- prom-migator
 
 その他はdebian標準のやつ(postgresql-13はpg公式リポジトリのやつ)
 
