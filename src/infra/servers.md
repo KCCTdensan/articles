@@ -19,6 +19,8 @@ mDNSは未設定．
 
 ## k0sクラスタ
 
+詳細は[/dev/cluster/](/dev/cluster/)にある．
+
 バージョン `v1.24.2+k0s.0`
 
 - `192.168.100.150(hiroshi)` : rpi 4B (arm64/4C4T/4GB)，32GB microSDカード
