@@ -6,6 +6,8 @@ noRobots: true
 
 # ラズパイ部室モニタについて
 
+**2022/07/29現在 promscaleが動かないのでサービス停止中**
+
 リポジトリ : https://github.com/KCCTdensan/busitsu
 
 ## 仕様
