@@ -3,11 +3,12 @@
   "version": "2.0.0",
   "dependencies": {
     "front-matter": "^4.0.2",
-    "marked": "^4.0.18",
+    "marked": "^4.1.1",
     "tiny-glob": "^0.2.9"
   },
   "private": true,
   "scripts": {
-    "build": "mkdir -p ./dist/api && node ./build.js"
+    "build": "node build",
+    "prebuild": "rm -rf dist && mkdir -p dist/api"
   }
 }

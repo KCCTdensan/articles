@@ -33,8 +33,10 @@ const assetDistDir = "dist/assets"
             description: content.attributes.description,
             author: content.attributes.author,
             noRobots: content.attributes.noRobots,
+            noTitleFormat: content.attributes.noTitleFormat,
             date: content.attributes.date,
             dateUpd: content.attributes.dateUpd,
+            showMeta: content.attributes.showMeta,
             body: marked.parse(content.body),
           })
         })
