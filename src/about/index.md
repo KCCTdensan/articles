@@ -21,12 +21,10 @@ showMeta: false
 
 - イラスト・音楽・ゲーム等の制作 (詳細 : [/works/](/works/))
 - 競技プログラミング
-
-
 - 低レベルプログラミング・CPU開発 (詳細 : [/dev/computer/](/dev/computer/))
 - ラズパイクラスタの構築 (詳細 : [/dev/cluster/](/dev/cluster/))
 - Webサイトの制作
-- 電子工作 (詳細 : [/dev/denkou/](/dev/denkou/))
+- 電子工作・マイコンやラズパイを用いたIoT(笑) (詳細 : [/dev/denkou/](/dev/denkou/))
 
 ## 実績
 
