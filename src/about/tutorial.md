@@ -1,3 +1,9 @@
+---
+title: tutorial
+description: 電算部のチュートリアル
+showMeta: false
+---
+
 # チュートリアル
 
 ## 前書き
