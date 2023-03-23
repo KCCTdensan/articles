@@ -46,7 +46,7 @@ Archが起動したら
 # passwd hoge
 # EDITOR=vim visudo
 ```  
-```EDITOR=vim visudo```を実行するとvimが立ち上がるので`# %wheel ALL=(ALL:ALL) NOPASSWD: ALL`という行の先頭の#を外してあげましょう(カーソルを合わせてxを入力すると消える)。あとはShiftを押しながらZを2回入力すると出られます。  
+`EDITOR=vim visudo`を実行するとvimが立ち上がるので`# %wheel ALL=(ALL:ALL) NOPASSWD: ALL`という行の先頭の#を外してあげましょう(カーソルを合わせてxを入力すると消える)。あとはShiftを押しながらZを2回入力すると出られます。  
 出られたら`exit`と入力し一度Archから出ましょう。  
 
 ## デフォルトユーザの設定
