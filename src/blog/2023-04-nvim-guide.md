@@ -5,7 +5,11 @@ dateUpd: 2023-04-12T21:30:00.000Z
 author: Mido (仮)
 ---
 
-TODO: Write the clear todo
+TODO
+- Write the clear todo
+- Decide author HN ASAP
+- Merge step: Update `date` and `dateUpd`
+- Ask about availability of quotes or notes in the static generation
 
 ## はじめに
 
@@ -25,7 +29,7 @@ Sublime Text や適度にセットアップされた Vim など、過剰に機�
 そのため大半の挙動や設定方法は Vim に似ていて、互換性も*ある程度*保たれていました。
 
 最近の Neovim の進化は凄まじく、changelog に含まれる新機能も、最近のエディターに必要とされるようなリッチな機能が増えてきました。  
-今までは IDE ほどの機能を有するには複雑で大きなプラグインでの機能拡張が必要で、機能が標準化されていないことから各プラグインでの独自実装が乱立するような状況になることもありました（例：闇の力を得たプラグインシリーズ）。  
+今までは IDE ほどの機能を有するには複雑で大きなプラグインでの機能拡張が必要で、機能が標準化されていないことから各プラグインでの独自実装が乱立するような状況になることもありました（例：[闇の力を得たプラグインシリーズ](https://github.com/Shougo/dein.vim)）。  
 それが昨今の Neovim では改善の方向に進んでいるのです。それもターミナル上で動くエディターに搭載されているとは思えない機能群を連れて。  
 しかしながら、Neovim（ないし Vim 系統のツール）は初期状態ではほとんど設定がされていない状態で、誰しもが必要である機能をもデフォルトで切られているオプションとして提供することもあります（それでも簡潔な編集は可能なほど質は高い状態にありますが）。  
 今回は、そんな Neovim を他のエディターに負けないようなオリジナルの PDE (Personal Development Environment) にするために、Neovim の設定（特に`$XDG_CONFIG_HOME/nvim`直下）のガイドを紹介します。
@@ -56,8 +60,12 @@ Lua が登場してからは Neovim 界隈では爆発的な人気を誇るよ�
 そのような大規模な変更により、Neovim は速度と言語機能の大幅な強化が達成できたのです。  
 直近での Neovim の起動速度を上げるほとんどのテクニックも [Lua ありきのものであり](https://github.com/lewis6991/impatient.nvim)、*Lua の API を使用しないと設定できない項目*（`vim.keymap.set(mode, keymap, opts)`での`opts`内の`desc`の設定など）も作られるようになっています。
 
+> **Note**
+> Neovim 0.9 から、impatient.nvim と同等の Lua バイトコードキャッシュ機能を実装する [`vim.loader`](https://github.com/neovim/neovim/pull/22668) が追加されたため、今後このプラグインを導入する必要はなくなるかもしれません。  
+> そのため、実際のガイド内容からは除外しています。
+
 また、Neovim の Lua には [luv](https://github.com/luvit/luv) と呼ばれる [libuv](https://libuv.org) のバインディングがビルトインで搭載されています（`vim.loop`からアクセス可能）。
-正しく非同期IOをすればvim.fn直下でアクセス可能な Vim 時代のIO関連の関数よりも高速な動作が期待できます。luv をラップした API も Neovim 向けに多く作られているようです（ex. [`vim.defer_fn()`](https://neovim.io/doc/user/lua.html#vim.defer_fn())）
+正しく非同期IOをすれば`vim.fn`直下でアクセス可能な Vim 時代のIO関連の関数よりも高速な動作が期待できます。luv をラップした API も Neovim 向けに多く作られているようです（ex. [`vim.defer_fn()`](https://neovim.io/doc/user/lua.html#vim.defer_fn())）
 
 しかし、Lua はランタイムのバージョンによって API の変更が顕著で、Lua について学ぶ際には注意しなければならないこともいくつかあります。  
 例えば、`unpack()`は Lua の[テーブル](https://ja.m.wikibooks.org/wiki/Lua/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB)の内容を単純な値のリストであるタプルとして返すために使われるグローバル関数ですが、Lua 5.2 以降ではこの関数は`table.unpack()`に変更されています。Lua を使うときには、どのバージョンの Lua を使用しているかをよく理解しておく必要があります。
