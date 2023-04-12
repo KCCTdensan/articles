@@ -11,6 +11,8 @@ TODO
 - Merge step: Update `date` and `dateUpd`
 - Ask about availability of quotes or notes in the static generation
 
+プログラミングをする人向け
+
 ## はじめに
 
 ソースコードを書くにはエディターが必要です。
@@ -69,7 +71,7 @@ Lua が登場してからは Neovim 界隈では爆発的な人気を誇るよ�
 
 しかし、Lua はランタイムのバージョンによって API の変更が顕著で、Lua について学ぶ際には注意しなければならないこともいくつかあります。  
 例えば、`unpack()`は Lua の[テーブル](https://ja.m.wikibooks.org/wiki/Lua/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB)の内容を単純な値のリストであるタプルとして返すために使われるグローバル関数ですが、Lua 5.2 以降ではこの関数は`table.unpack()`に変更されています。Lua を使うときには、どのバージョンの Lua を使用しているかをよく理解しておく必要があります。
-なお、LuaJIT は Lua 5.1 相当で実装されています。（そのため`unpack()`を使用しなければなりません）
+なお、LuaJIT は Lua 5.1 相当で実装されています（そのため`unpack()`を使用しなければなりません）。
 
 ### ネイティブ LSP クライアントの実装
 
