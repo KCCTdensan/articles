@@ -9,12 +9,30 @@ TODO: Write the clear todo
 
 ## はじめに
 
-最近の [Neovim](https://github.com/neovim/neovim) の進化は凄まじく、changelog に含まれる新機能も、最近のエディターに必要とされるようなリッチな機能が増えてきました。  
-今回は、そんな Neovim を他のエディターに負けないようなオリジナルの PDE (Personal Development Environment) にするために、Neovim の設定（特に$XDG_CONFIG_HOME/nvim直下）のガイドを紹介します。
+ソースコードを書くにはエディターが必要です。
+プログラミングに慣れ始めてくると、エディター自身のこともよく知るようになり、使っているうちに便利な部分・不便な部分を洗い出せるようになってくるでしょう。  
+そこで、ふと思ったことはありませんか？
+
+「他のエディターってどうなの？」
+
+と。  
+
+Visual Studio Code あるいは JetBrains IntelliJ IDEA など、リッチな編集環境を使用している人もいれば、
+Sublime Text や適度にセットアップされた Vim など、過剰に機能が搭載されていないようなエディターを使用している人もいるかと思います。  
+今回はそのような方々向けに、私から [Neovim](https://neovim.io) と呼ばれるエディターを紹介します。~~ついでに乗り換えてくだされば筆者が大喜びします~~
+
+[Neovim](https://neovim.io) とは、[Vim](https://www.vim.org) から派生されて、さまざまな独自機能が盛り込まれたテキストエディター又はコードエディターです（未設定の状態でコードエディターと言える性能かどうかは諸説あり）。  
+そのため大半の挙動や設定方法は Vim に似ていて、互換性も*ある程度*保たれていました。
+
+最近の Neovim の進化は凄まじく、changelog に含まれる新機能も、最近のエディターに必要とされるようなリッチな機能が増えてきました。  
+今までは IDE ほどの機能を有するには複雑で大きなプラグインでの機能拡張が必要で、機能が標準化されていないことから各プラグインでの独自実装が乱立するような状況になることもありました（例：闇の力を得たプラグインシリーズ）。  
+それが昨今の Neovim では改善の方向に進んでいるのです。それもターミナル上で動くエディターに搭載されているとは思えない機能群を連れて。  
+しかしながら、Neovim（ないし Vim 系統のツール）は初期状態ではほとんど設定がされていない状態で、誰しもが必要である機能をもデフォルトで切られているオプションとして提供することもあります（それでも簡潔な編集は可能なほど質は高い状態にありますが）。  
+今回は、そんな Neovim を他のエディターに負けないようなオリジナルの PDE (Personal Development Environment) にするために、Neovim の設定（特に`$XDG_CONFIG_HOME/nvim`直下）のガイドを紹介します。
 
 このガイドでは、設定の優先順位を次の４つで分類しています。
 また、設定には通常の API を通した設定、およびプラグインの設定が含まれます。
-Neovim の推奨バージョンは>= 0.9です。
+Neovim の推奨バージョンは`>= 0.9`です。
 
 1. Must-have: Neovim 本体の利便性に深く関わる機能。DX を間違いなく向上させる。
 2. Recommended: 必ずとまではいかないが、設定を推奨する機能。多くの場面で DX の向上につながる。
@@ -32,21 +50,24 @@ Neovim は Vim のフォークであり、数年前に分かれてから、良�
 
 - 最初の実装: [Neovim 0.5](https://github.com/neovim/neovim/releases/tag/v0.5.0)
 
-従来は$XDG_CONFIG_HOME/nvim/init.vimのみが設定ファイルのエントリーポイントでしたが、Neovim 0.5 で [LuaJIT](https://luajit.org) による初の$XDG_CONFIG_HOME/nvim/init.luaのサポートが追加されました。
-それ以降の多くの変更により、カラースキームやプラグイン、[ファイルタイプ検出スクリプト](https://github.com/neovim/neovim/pull/16600)にも Lua が使用されるようになり、速度と言語機能の大幅な強化が達成できました。
-直近での Neovim の起動速度を上げるほとんどのテクニックも [Lua ありきのものであり](https://github.com/lewis6991/impatient.nvim)、*Lua の API を使用しないと設定できない項目*（vim.keymap.set(mode, keymap, opts)でのopts内のdescの設定など）も作られるようになっています。
+従来は`$XDG_CONFIG_HOME/nvim/init.vim`のみが設定ファイルのエントリーポイントでしたが、Neovim 0.5 で [LuaJIT](https://luajit.org) による初の`$XDG_CONFIG_HOME/nvim/init.lua`のサポートが追加されました。
+Just In Time コンパイルにより通常の Lua ランタイムより高速に動作し、FFI やバイトコードへの先行コンパイルもサポートされています。  
+Lua が登場してからは Neovim 界隈では爆発的な人気を誇るようになり、カラースキームやプラグイン、[ファイルタイプ検出スクリプト](https://github.com/neovim/neovim/pull/16600)にも Lua が使用されるようになりました。
+そのような大規模な変更により、Neovim は速度と言語機能の大幅な強化が達成できたのです。  
+直近での Neovim の起動速度を上げるほとんどのテクニックも [Lua ありきのものであり](https://github.com/lewis6991/impatient.nvim)、*Lua の API を使用しないと設定できない項目*（`vim.keymap.set(mode, keymap, opts)`での`opts`内の`desc`の設定など）も作られるようになっています。
 
-また、Neovim の Lua には [luv](https://github.com/luvit/luv) と呼ばれる [libuv](https://libuv.org) のバインディングがビルトインで搭載されています（vim.loopからアクセス可能）。正しく非同期IOをすればvim.fn直下でアクセス可能な Vim 時代のIO関連の関数よりも高速な動作が期待できます。luv をラップした API も Neovim 向けに多く作られているようです（ex. [vim.defer_fn](https://neovim.io/doc/user/lua.html#vim.defer_fn())）
+また、Neovim の Lua には [luv](https://github.com/luvit/luv) と呼ばれる [libuv](https://libuv.org) のバインディングがビルトインで搭載されています（`vim.loop`からアクセス可能）。
+正しく非同期IOをすればvim.fn直下でアクセス可能な Vim 時代のIO関連の関数よりも高速な動作が期待できます。luv をラップした API も Neovim 向けに多く作られているようです（ex. [`vim.defer_fn()`](https://neovim.io/doc/user/lua.html#vim.defer_fn())）
 
 しかし、Lua はランタイムのバージョンによって API の変更が顕著で、Lua について学ぶ際には注意しなければならないこともいくつかあります。  
-例えば、unpack()は Lua の[テーブル](https://ja.m.wikibooks.org/wiki/Lua/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB)の内容を単純な値のリストであるタプルとして返すために使われるグローバル関数ですが、Lua 5.2 以降ではこの関数はtable.unpack()に変更されています。Lua を使うときには、どのバージョンの Lua を使用しているかをよく理解しておく必要があります。  
-なお、LuaJIT は Lua 5.1 相当で実装されています。（そのためunpack()を使用しなければなりません）
+例えば、`unpack()`は Lua の[テーブル](https://ja.m.wikibooks.org/wiki/Lua/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB)の内容を単純な値のリストであるタプルとして返すために使われるグローバル関数ですが、Lua 5.2 以降ではこの関数は`table.unpack()`に変更されています。Lua を使うときには、どのバージョンの Lua を使用しているかをよく理解しておく必要があります。
+なお、LuaJIT は Lua 5.1 相当で実装されています。（そのため`unpack()`を使用しなければなりません）
 
 ### ネイティブ LSP クライアントの実装
 
 - 最初の実装: [Neovim 0.5](https://github.com/neovim/neovim/releases/tag/v0.5.0)
 
-以前にも LSP サーバーを使用する方法として [coc.nvim](https://github.com/neoclide/coc.nvim) がありましたが、Neovim 0.5 から [Lua の API](https://neovim.io/doc/user/lsp.html) を通してネイティブで LSP サーバーを使用できるようになりました。
+以前にも LSP サーバーを使用する方法として [coc.nvim](https://github.com/neoclide/coc.nvim) がありましたが、Neovim 0.5 から [Lua の API](https://neovim.io/doc/user/lsp.html) を通してネイティブで LSP サーバーを使用できるようになりました。  
 Lua サポートと合わせてこの機能の実装は非常に注目を集め、Neovim LSP 対応のプラグインが多く作成されるようになりました。
 
 ### Neovim Python/Node/Ruby/Perl プロバイダーの実装
