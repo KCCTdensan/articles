@@ -89,3 +89,114 @@ Lua サポートと合わせてこの機能の実装は非常に注目を集め�
 ## 設定
 
 Linux x86_64 上での動作を想定しています。
+
+### 1. Must-have
+
+必須設定から紹介していきましょう。
+
+#### `vim.loader` の有効化
+
+[`vim.loader`](https://github.com/neovim/neovim/pull/22668) は Neovim 0.9 で実装された新しい Lua モジュールローダーです。一度ロードしたモジュールは自動でバイトコードにコンパイルし、以降のロードでは直接バイトコードを読み込むことでロードコストを大幅に低減する仕組みとなっています。
+
+使い方は簡単です。以下の行を`init.lua`に追加します:
+
+```lua
+vim.loader.enable()
+```
+
+#### プラグインマネージャーのセットアップ
+
+Neovim はビルトインで[`packages`](https://neovim.io/doc/user/repeat.html#packages)と呼ばれるプラグイン管理機能を持っています。
+しかしながら、プラグインのインストールには手動で`git clone`で
+`~/.local/share/nvim/site/pack/*`直下にプラグイン本体を配置する必要があり、ポータブルな設定をするには非常に手間です。そのため、基本的に Neovim では専用のプラグインマネージャーを使ってプラグインをインストールすることが多いです。  
+最近(2023)でのプラグインマネージャーのトレンドは [lazy.nvim](https://github.com/folke/lazy.nvim) です。
+Vim 時代でもプラグインのインストールの手法の一つとして使われていた[`runtimepath`](https://neovim.io/doc/user/options.html#'runtimepath')を使用し、可能な限りプラグインを遅延ロードすることで、起動時間の短縮を目指しているようです。  
+プラグインマネージャーのインストールにあたるブートストラップの作業もやり方が非常
+に豊富ですが、ここでは例として数行で使えるブートストラップコードを紹介します。
+
+```lua
+local function bootstrap()
+  local plugin_manager_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
+  local stat = vim.loop.fs_stat(plugin_manager_path)
+
+  if stat then
+    return
+  end
+
+  vim.fn.system("git clone https://github.com/folke/lazy.nvim.git --filter=blob:none --branch=stable " .. plugin_manager_path)
+end
+
+bootstrap()
+
+vim.opt.rtp:prepend(plugin_manager_path)
+
+require("lazy").setup("plugins")
+
+-- これらの設定を適用すると、lazy.nvim は自動で ~/.config/nvim/lua/plugins/{*.lua,*/init.lua} のプラグイン設定を読み込みます。
+-- これらの設定ではファイル毎に以下のように記述することでプラグインをロードできます:
+--
+-- return {
+--   "folke/noice.nvim" -- プラグイン名
+-- }
+--
+-- 詳細な設定は https://github.com/folke/lazy.nvim#-plugin-spec 周辺を見るのがおすすめです。
+```
+
+### 4. Optional
+
+やりたい人のみ設定をおすすめします。
+
+#### 起動時間の短縮: ビルトインプラグインの無効化
+
+Neovim にはビルトインでいくつかのプラグインが導入されていますが、そのほとんどは
+実際に使うことが少なく、無効化してもいいものが多いです。
+しかしながら、それらのプラグインが Neovim の起動時間に影響をもたえらす可能性も非
+常に少ないため、最大効率を目指したい方はやってみることをおすすめします。数ミリ秒
+程度起動が速くなるかも。  
+設定方法は簡単です。以下の行をロード予定の好きな設定に追加します:
+
+```lua
+-- ノート: これらのプラグインはビルトインにしては珍しく有用なものです。matchit
+--         の競合プラグインですので、matchit を導入せずに似たような機能を使用したい場合はこ
+--         れらの行を削除してください。
+vim.g.loaded_matchit = 1
+vim.g.loaded_matchparen = 1
+
+-- 注意: netrw はビルトインの▽ファイルマネージャーです。場合によっては必要なとき
+--       もあるかもしれませんので、使わない保証があるときのみ以下の4行を追加してください:
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrwSettings = 1
+vim.g.loaded_netrwFileHandlers = 1
+
+-- 注意: Python3 / Node プロバイダーは外部プロバイダーを使用するプラグインの中で
+--       特にメジャーなものの一つです。本ガイドではそのようなプラグインは依存関係の増加を
+--       防ぐためなるべく紹介しないように努めていますが、今後そのようなプラグインを使う見
+--       通しが立っている場合は注意してください。
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+
+-- 以下は無効化してもほぼ支障はありません。
+
+vim.g.loaded_man = 1
+vim.g.loaded_gzip = 1
+vim.g.loaded_zip = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_tar = 1
+vim.g.loaded_tarPlugin = 1
+
+vim.g.loaded_getscript = 1
+vim.g.loaded_getscriptPlugin = 1
+vim.g.loaded_vimball = 1
+vim.g.loaded_vimballPlugin = 1
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_tutor_mode_plugin = 1
+vim.g.loaded_spellfile_plugin = 1
+
+vim.g.loaded_logiPat = 1
+vim.g.loaded_rrhelper = 1
+```
+
