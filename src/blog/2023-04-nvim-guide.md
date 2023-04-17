@@ -5,12 +5,6 @@ dateUpd: 2023-04-12T21:30:00.000Z
 author: Mido (仮)
 ---
 
-TODO
-- Write the clear todo
-- Decide author HN ASAP
-- Merge step: Update `date` and `dateUpd`
-- Ask about availability of quotes or notes in the static generation
-
 プログラミングをする人向け
 
 ## はじめに
