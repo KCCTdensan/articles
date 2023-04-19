@@ -146,10 +146,15 @@ require("lazy").setup("plugins")
 `<leader>` は Neovim で使用する、独自の考え方の一つです。プラグインにより拡張されるあらゆる動作は、ほとんど `<leader>` から始まるキーマップに設定されます。  
 そのため、`<leader>` を押しやすい場所に設定することはとても重要です。QoL を左右します。  
 `<localleader>` はファイルタイプ毎、バッファータイプ毎など、全体で使うことがないが動的に設定することがあるキーマップの定義で使用されます。
-`<leader>` の設定には [`mapleader`](https://neovim.io/doc/user/map.html#mapleader) 、`<localleader>` の設定には [`maplocalleader`](https://neovim.io/doc/user/map.html#maplocalleader) を使用します。
+`<leader>` の設定には [`mapleader`](https://neovim.io/doc/user/map.html#mapleader) 、`<localleader>` の設定には [`maplocalleader`](https://neovim.io/doc/user/map.html#maplocalleader) を使用します。  
+設定方法とおすすめのキーはこちら:
 
 ```lua
+-- <leader>
+vim.g.mapleader = " " -- スペースキーに設定
 
+-- <localleader>
+vim.g.localleader = "," -- カンマに設定
 ```
 
 ### 4. Optional
