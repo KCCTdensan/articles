@@ -34,17 +34,19 @@ showMeta: false
 
 - デスクトップPC (Intelのみ) : 複数台
 - ノートPC : 2台
+- ミニPC : 1台
 - Mac mini : 3台
 - 液タブ : 1台
 - よくわからない板タブ : 2台くらい
 - Midi対応キーボード(76鍵) : 1台
 - ルーター : RTX830 / RTX1200
-- サーバー : Haswell i5が1機 / ラズパイ複数
-- その他入門書
+- サーバー : Haswell i5が1機 / ミニPCクラスタ / ラズパイ複数
+- マイコン : Arduino / M5Stack
+- その他入門書、電子部品、ケーブル等
 
 グラフィックボードはRTXが3台，GTXが2台あります．
 
-PCにはWindowsの他にLinux(Gentoo / Zorin等)が入っていたりします．
+PCにはWindowsの他にLinux(Gentoo / Arch / Zorin等)が入っていたりします．
 
 また，美術部に無いペンタブが電算部にはあります．
 学校で絵を描きたくなったがiPadを忘れたときなどに便利です．
