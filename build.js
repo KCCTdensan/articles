@@ -24,6 +24,7 @@ await Promise.allSettled([
 
 async function proc(srcDir, distFile) {
   const files = await glob(`${srcDir}/**/*.md`)
+console.log(files)
   const data = { data: [] }
   await Promise.all(
     files.map(async path => {
